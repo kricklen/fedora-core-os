@@ -8,11 +8,12 @@ passwd:
 storage:
   disks:
   - device: /dev/disk/by-id/ata-VBOX_HARDDISK_VB4faaf45e-66c1dcb6
-    wipe_table: false
+    wipe_table: true
     partitions:
     - label: root
       number: 1
       size_mib: 8192
+      start_mib: 0
     - label: volumes
       number: 2
   filesystems:

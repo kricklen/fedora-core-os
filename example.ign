@@ -30,14 +30,15 @@
           {
             "label": "root",
             "number": 1,
-            "sizeMiB": 8192
+            "sizeMiB": 8192,
+            "startMiB": 0
           },
           {
             "label": "volumes",
             "number": 2
           }
         ],
-        "wipeTable": false
+        "wipeTable": true
       }
     ],
     "filesystems": [
