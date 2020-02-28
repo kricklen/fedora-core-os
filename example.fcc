@@ -13,10 +13,9 @@ storage:
     - label: root
       number: 0
       size_mib: 8192
-      start_mib: 0
-  filesystems:
     - label: volumes
       number: 1
+  filesystems:
   - path: /
     device: /dev/sda1
     format: btrfs
