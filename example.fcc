@@ -11,10 +11,10 @@ storage:
     wipe_table: false
     partitions:
     - label: root
-      number: 0
+      number: 1
       size_mib: 8192
     - label: volumes
-      number: 1
+      number: 2
   filesystems:
   - path: /
     device: /dev/sda1
