@@ -1,8 +1,42 @@
 variant: fcos
-version: 1.0.0
+version: 1.1.0
+
 passwd:
   users:
   - name: core
     password_hash: "Ldhvw2BqCQ2BM"
     ssh_authorized_keys:
     - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCsKfncWkb7cU2AEhZHOkzj5sqy6JxBKL9G2YvwqMqY1o625BBMJZ+ICK3YI05tUVjYxb82trHPR8aGjsXTfiRxcZPXzPmsWGjOZDicJTd4YVoycPEPzCXBrZzwzCqT2QlhtzPyrMruJF/gVVenZseGBD0hdcojO9BrjwXhSBfSEfw7Og9B+p1Jszo0Ie1a93go10bBatsXcajEQP9bxRzd6f16zO8eTIMKdlmb90otOWX5Iom4RBY1XzKzAxZd3xgMyhIkdpq+wWauBVhQHhuTyGyy2UOBwF7ldmk5VqxIbxVtaIcpSN8jGAb8eUvSzkuEH1wVlYVpiRExlmmkqSftaWn1GbdoFB2/XHvlhZ6C8bWCGybDSoyugDIQ894pwJWNct2Uw+Y4rT26Ztz4PrDszKPcaP1z+xmWVAz00FjpD6BMZRcfV3UlKvknZnodPXNHr+Q3k1CsovLBrpvgJLi0JQJlu7jqpe2rwzSOc2q+bX/hC7dUzoyDQtLxr/piy1qqDC1xjjwNfgtwVKj0r0qht6NsIOoXSktEIy648AGUlmpV71wqaemXUk4I7+csIlpkDfP8EAPXhADfvfpDx1OwKCm4J+AZfaLYzFBEXuhj2V+8f/4YlSRSGCQH+O3mfF9sSx2DW8Oplb7n4L7G3vbYNobrE8zhjoQ7T2/eprcQgw==
+
+systemd:
+  units:
+    - name: serial-getty@ttyS0.service
+      dropins:
+      - name: autologin-core.conf
+        contents: |
+          [Service]
+          # Override Execstart in main unit
+          ExecStart=
+          # Add new Execstart with `-` prefix to ignore failure`
+          ExecStart=-/usr/sbin/agetty --autologin core --noclear %I $TERM
+
+storage:
+  files:
+    - path: /etc/hostname
+      mode: 0644
+      contents:
+        inline: |
+          tutorial
+    - path: /etc/profile.d/systemd-pager.sh
+      mode: 0644
+      contents:
+        inline: |
+          # Tell systemd to not use a pager when printing information
+          export SYSTEMD_PAGER=cat
+    - path: /etc/sysctl.d/20-silence-audit.conf
+      mode: 0644
+      contents:
+        inline: |
+          # Raise console message logging level from DEBUG (7) to WARNING (4)
+          # to hide audit messages from the interactive console
+          kernel.printk=4
