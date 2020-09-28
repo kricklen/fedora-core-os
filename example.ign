@@ -47,12 +47,8 @@
         "name": "serial-getty@ttyS0.service"
       },
       {
-        "dropins": [
-          {
-            "contents": "[Service]\n# Install required packages\nExecStart=rpm-ostree install git ansible fail2ban google-authenticator\n",
-            "name": "install-packages.conf"
-          }
-        ],
+        "contents": "[Unit]\nDescription=Install required OS packages\nAfter=network-online.target\nWants=network-online.target\n[Service]\nType=oneshot\n# Install required packages\nExecStart=/usr/bin/rpm-ostree install git ansible fail2ban google-authenticator\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
         "name": "install-packages.service"
       }
     ]
