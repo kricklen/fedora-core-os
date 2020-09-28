@@ -20,15 +20,18 @@ systemd:
           # Add new Execstart with `-` prefix to ignore failure`
           ExecStart=-/usr/sbin/agetty --autologin core --noclear %I $TERM
     - name: install-packages.service
-      dropins:
-      - name: install-packages.conf
-        contents: |
-          [Service]
-          # Override Execstart in main unit
-          ExecStart=
-          # Install required packages
-          ExecStart=/usr/bin/rpm-ostree install git ansible fail2ban google-authenticator
-
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Install required OS packages
+        After=network-online.target
+        Wants=network-online.target
+        [Service]
+        Type=oneshot
+        # Install required packages
+        ExecStart=/usr/bin/rpm-ostree install git ansible fail2ban google-authenticator
+        [Install]
+        WantedBy=multi-user.target
 storage:
   files:
     - path: /etc/hostname
