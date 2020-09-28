@@ -29,7 +29,11 @@ systemd:
         [Service]
         Type=oneshot
         # Install required packages
-        ExecStart=/usr/bin/rpm-ostree install git ansible fail2ban google-authenticator
+        ExecStart=/usr/bin/rpm-ostree install git
+        ExecStart=/usr/bin/rpm-ostree install ansible
+        ExecStart=/usr/bin/rpm-ostree install fail2ban
+        ExecStart=/usr/bin/rpm-ostree install google-authenticator
+        ExecStart=/usr/bin/systemctl reboot
         [Install]
         WantedBy=multi-user.target
 storage:
