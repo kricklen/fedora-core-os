@@ -24,8 +24,10 @@ systemd:
       - name: install-packages.conf
         contents: |
           [Service]
+          # Override Execstart in main unit
+          ExecStart=
           # Install required packages
-          ExecStart=rpm-ostree install git ansible fail2ban google-authenticator
+          ExecStart=/usr/bin/rpm-ostree install git ansible fail2ban google-authenticator
 
 storage:
   files:
