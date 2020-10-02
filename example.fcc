@@ -34,12 +34,12 @@ systemd:
         # ExecStart=/usr/bin/rpm-ostree install fail2ban
         # ExecStart=/usr/bin/rpm-ostree install google-authenticator
         # ExecStart=/usr/bin/systemctl reboot
-        ExecStart=/tmp/test.sh
+        ExecStart=/usr/bin/bash /var/install/test.sh
         [Install]
         WantedBy=multi-user.target
 storage:
   files:
-    - path: /tmp/test.sh
+    - path: /var/install/test.sh
       mode: 0755
       contents:
         inline: |
