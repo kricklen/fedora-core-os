@@ -13,14 +13,6 @@
   "storage": {
     "files": [
       {
-        "path": "/test.sh",
-        "contents": {
-          "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/3yNMQrDQAwE+3vFBdfmID+SjGILZClI6yK/T3fllcvOMNtrPJWD1QdTXW2u/N57FFKkqxfIrJ+K5U9eyiZL5kNqbyZfhyJOk50eXOLQgxDZtmnUryD3AespHIH2DwAA//9zUcIUxQAAAA=="
-        },
-        "mode": 493
-      },
-      {
         "path": "/etc/hostname",
         "contents": {
           "source": "data:,tutorial%0A"
