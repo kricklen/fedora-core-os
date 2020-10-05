@@ -16,7 +16,7 @@
         "path": "/var/install/test.sh",
         "contents": {
           "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/3yNMQrDQAwE+3vFBdfmID+SjGILZClI6yK/T3fllcvOMNtrPJWD1QdTXW2u/N57FFKkqxfIrJ+K5U9eyiZL5kNqbyZfhyJOk50eXOLQgxDZtmnUryD3AespHIH2DwAA//9zUcIUxQAAAA=="
+          "source": "data:;base64,H4sIAAAAAAAC/5TQwUoDMRAG4HueYoriLaR614PoeUG8ichkO5sOTDIlmS369lKpvWyg7APM9//z32zC3GqIXELEtnf0fdBq8DJ8vb0+D8P749bxBBsYNWcsO/BHSGxw9wRhR8dQZhFneyoO4ALVQ/barBIBl2YocrpxEy8oLI2jUJdbNLm/knHGejkTsjxELKt7/x/20KSahDzOJ8d4RNO6fpgOcg77gNvL8+CTwRY+F2T7aUZ5NIFKUfVv5d8AAAD//3s6sQXUAQAA"
         },
         "mode": 493
       },

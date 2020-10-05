@@ -44,11 +44,28 @@ storage:
       contents:
         inline: |
           #!/usr/bin/bash
-          /usr/bin/rpm-ostree install git
-          /usr/bin/rpm-ostree install ansible
-          /usr/bin/rpm-ostree install fail2ban
-          /usr/bin/rpm-ostree install google-authenticator
-          #/usr/bin/systemctl reboot
+          export DO_REBOOT=0
+          if ! command -v git &> /dev/null
+          then
+            /usr/bin/rpm-ostree install git
+          fi
+          if ! command -v ansible &> /dev/null
+          then
+            export DO_REBOOT=1
+            /usr/bin/rpm-ostree install ansible
+          fi
+          if ! command -v fail2ban &> /dev/null
+          then
+            /usr/bin/rpm-ostree install fail2ban
+          fi
+          if ! command -v google-authenticator &> /dev/null
+          then
+            /usr/bin/rpm-ostree install google-authenticator
+          fi
+          if [ $DO_REBOOT -gt 0 ]
+          then
+            /usr/bin/systemctl reboot
+          fi
     - path: /etc/hostname
       mode: 0644
       contents:
