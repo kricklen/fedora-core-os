@@ -1,5 +1,5 @@
 variant: fcos
-version: 1.1.0
+version: 1.2.0
 
 passwd:
   users:
@@ -47,19 +47,23 @@ storage:
           export DO_REBOOT=0
           if ! command -v git &> /dev/null
           then
+            echo "Installing git ..."
             /usr/bin/rpm-ostree install git
           fi
           if ! command -v ansible &> /dev/null
           then
+            echo "Installing ansible ..."
             export DO_REBOOT=1
             /usr/bin/rpm-ostree install ansible
           fi
           if ! command -v fail2ban &> /dev/null
           then
+            echo "Installing fail2ban ..."
             /usr/bin/rpm-ostree install fail2ban
           fi
           if ! command -v google-authenticator &> /dev/null
           then
+            echo "Installing google-authenticator ..."
             /usr/bin/rpm-ostree install google-authenticator
           fi
           if [ $DO_REBOOT -gt 0 ]
@@ -70,7 +74,7 @@ storage:
       mode: 0644
       contents:
         inline: |
-          tutorial
+          fcos-tux
     - path: /etc/profile.d/systemd-pager.sh
       mode: 0644
       contents:

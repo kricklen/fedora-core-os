@@ -1,6 +1,6 @@
 {
   "ignition": {
-    "version": "3.1.0"
+    "version": "3.2.0"
   },
   "passwd": {
     "users": [
@@ -16,14 +16,14 @@
         "path": "/var/install/test.sh",
         "contents": {
           "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/5TQwUoDMRAG4HueYoriLaR614PoeUG8ichkO5sOTDIlmS369lKpvWyg7APM9//z32zC3GqIXELEtnf0fdBq8DJ8vb0+D8P749bxBBsYNWcsO/BHSGxw9wRhR8dQZhFneyoO4ALVQ/barBIBl2YocrpxEy8oLI2jUJdbNLm/knHGejkTsjxELKt7/x/20KSahDzOJ8d4RNO6fpgOcg77gNvL8+CTwRY+F2T7aUZ5NIFKUfVv5d8AAAD//3s6sQXUAQAA"
+          "source": "data:;base64,H4sIAAAAAAAC/4yRMU/DMBCFd/+K14LYEhd2GBAMTJEQG0LITi+OJcdX2ZcK/j1qSbI0Ur1/7753dzcbPeakrY/amtwr+jlwErw03++vz03z8bhTvsMGLQ+DiXtURzgvuHuC3tNRxzEEJT1FBVDbM7ZvMYsJwUd3Buu63ipgkaTDUHGWRAT/T54w1fkLjYnZ20BlqhmedBdb3F/pMOXXenTGhwdrYlmRhS5YfGbXrI7ZBarMeBKJb41wKrz6WrLkDSu5qdknbpdTonKCHb5m/zIy/2ahoZWARJb5/NO/AAAA//9y+GBKXgIAAA=="
         },
         "mode": 493
       },
       {
         "path": "/etc/hostname",
         "contents": {
-          "source": "data:,tutorial%0A"
+          "source": "data:,fcos-tux%0A"
         },
         "mode": 420
       },
