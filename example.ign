@@ -16,7 +16,7 @@
         "path": "/var/install/test.sh",
         "contents": {
           "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/4yRMU/DMBCFd/+K14LYEhd2GBAMTJEQG0LITi+OJcdX2ZcK/j1qSbI0Ur1/7753dzcbPeakrY/amtwr+jlwErw03++vz03z8bhTvsMGLQ+DiXtURzgvuHuC3tNRxzEEJT1FBVDbM7ZvMYsJwUd3Buu63ipgkaTDUHGWRAT/T54w1fkLjYnZ20BlqhmedBdb3F/pMOXXenTGhwdrYlmRhS5YfGbXrI7ZBarMeBKJb41wKrz6WrLkDSu5qdknbpdTonKCHb5m/zIy/2ahoZWARJb5/NO/AAAA//9y+GBKXgIAAA=="
+          "source": "data:;base64,H4sIAAAAAAAC/4yRMU/DMBCFd/+Ka0Fsjgs7DAgGpkiIDSFkuxfnJMdX2ZcK/j1qSbI0Ur1/z997vpuNGUs2jpJxtvQKfw6cBV7a7/fX57b9eNwp6mADnofBpj3oIwQSuHsCs8ejSWOMSnpMCgB9z7B9S0VsjJTCGWyaZqsAFkk+DJqLZESgf/KEqY4uNDYVchHrVDM86S5W3F/pMOXXenSW4oOzSftImCqnz6Ga/TO7Jg/MIaK240kk5K1wrvz8tWTNNVZyU7NPuF1+FHQQ2MHX7F+eLL9FcPASIaNjPp/2LwAA//9C21FmZQIAAA=="
         },
         "mode": 493
       },

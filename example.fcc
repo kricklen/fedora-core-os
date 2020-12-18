@@ -56,7 +56,7 @@ storage:
             export DO_REBOOT=1
             /usr/bin/rpm-ostree install ansible
           fi
-          if ! command -v fail2ban &> /dev/null
+          if ! command -v fail2ban-client &> /dev/null
           then
             echo "Installing fail2ban ..."
             /usr/bin/rpm-ostree install fail2ban
