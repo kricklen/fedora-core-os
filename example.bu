@@ -1,0 +1,101 @@
+variant: fcos
+version: 1.5.0
+
+passwd:
+  users:
+  - name: core
+    password_hash: "$1$0Jv3aq2a$BJtVPlmsfJml1riK.JDNk0"
+    # ssh_authorized_keys:
+    # - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCsKfncWkb7cU2AEhZHOkzj5sqy6JxBKL9G2YvwqMqY1o625BBMJZ+ICK3YI05tUVjYxb82trHPR8aGjsXTfiRxcZPXzPmsWGjOZDicJTd4YVoycPEPzCXBrZzwzCqT2QlhtzPyrMruJF/gVVenZseGBD0hdcojO9BrjwXhSBfSEfw7Og9B+p1Jszo0Ie1a93go10bBatsXcajEQP9bxRzd6f16zO8eTIMKdlmb90otOWX5Iom4RBY1XzKzAxZd3xgMyhIkdpq+wWauBVhQHhuTyGyy2UOBwF7ldmk5VqxIbxVtaIcpSN8jGAb8eUvSzkuEH1wVlYVpiRExlmmkqSftaWn1GbdoFB2/XHvlhZ6C8bWCGybDSoyugDIQ894pwJWNct2Uw+Y4rT26Ztz4PrDszKPcaP1z+xmWVAz00FjpD6BMZRcfV3UlKvknZnodPXNHr+Q3k1CsovLBrpvgJLi0JQJlu7jqpe2rwzSOc2q+bX/hC7dUzoyDQtLxr/piy1qqDC1xjjwNfgtwVKj0r0qht6NsIOoXSktEIy648AGUlmpV71wqaemXUk4I7+csIlpkDfP8EAPXhADfvfpDx1OwKCm4J+AZfaLYzFBEXuhj2V+8f/4YlSRSGCQH+O3mfF9sSx2DW8Oplb7n4L7G3vbYNobrE8zhjoQ7T2/eprcQgw==
+
+systemd:
+  units:
+    - name: serial-getty@ttyS0.service
+      dropins:
+      - name: autologin-core.conf
+        contents: |
+          [Service]
+          # Override Execstart in main unit
+          ExecStart=
+          # Add new Execstart with `-` prefix to ignore failure`
+          ExecStart=-/usr/sbin/agetty --autologin core --noclear %I $TERM
+    - name: install-packages.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Install required OS packages
+        After=network-online.target
+        Wants=network-online.target
+        [Service]
+        Type=oneshot
+        ExecStart=/usr/bin/bash /var/install/test.sh
+        [Install]
+        WantedBy=multi-user.target
+    - name: hello.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=MyApp
+        After=network-online.target
+        Wants=network-online.target
+
+        [Service]
+        TimeoutStartSec=0
+        ExecStartPre=-/bin/podman kill busybox1
+        ExecStartPre=-/bin/podman rm busybox1
+        ExecStartPre=/bin/podman pull busybox
+        ExecStart=/bin/podman run --name busybox1 busybox /bin/sh -c "trap 'exit 0' INT TERM; while true; do echo Hello World; sleep 1; done"
+
+        [Install]
+        WantedBy=multi-user.target
+storage:
+  files:
+    - path: /var/install/test.sh
+      mode: 0755
+      contents:
+        inline: |
+          #!/usr/bin/bash
+          export DO_REBOOT=0
+          if ! command -v git &> /dev/null
+          then
+            echo "Installing git ..."
+            /usr/bin/rpm-ostree install git
+          fi
+          if ! command -v ansible &> /dev/null
+          then
+            echo "Installing ansible ..."
+            export DO_REBOOT=1
+            /usr/bin/rpm-ostree install ansible
+          fi
+          if ! command -v fail2ban-client &> /dev/null
+          then
+            echo "Installing fail2ban ..."
+            /usr/bin/rpm-ostree install fail2ban
+          fi
+          if ! command -v google-authenticator &> /dev/null
+          then
+            echo "Installing google-authenticator ..."
+            /usr/bin/rpm-ostree install google-authenticator
+          fi
+          if [ $DO_REBOOT -gt 0 ]
+          then
+            /usr/bin/systemctl reboot
+          fi
+    - path: /etc/hostname
+      mode: 0644
+      contents:
+        inline: |
+          fcos-tux
+    - path: /etc/profile.d/systemd-pager.sh
+      mode: 0644
+      contents:
+        inline: |
+          # Tell systemd to not use a pager when printing information
+          export SYSTEMD_PAGER=cat
+    - path: /etc/sysctl.d/20-silence-audit.conf
+      mode: 0644
+      contents:
+        inline: |
+          # Raise console message logging level from DEBUG (7) to WARNING (4)
+          # to hide audit messages from the interactive console
+          kernel.printk=4
