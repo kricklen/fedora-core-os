@@ -24,7 +24,7 @@ https://docs.fedoraproject.org/en-US/fedora-coreos/bare-metal/#_installing_from_
 
 ### HowTo for this installation
 The docker image for fcc transpiler and the validator is required. Pull it on the developer machine by hand, it will be pulled by the scripts also:
-`docker pull quay.io/coreos/fcct:release`
+`docker pull quay.io/coreos/butane:release`
 `docker pull quay.io/coreos/ignition-validate:release`
 
 Now begin with editing the fcos config (.fcc). The documentation for fcc is available here:
