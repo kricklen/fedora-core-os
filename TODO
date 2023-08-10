@@ -1,0 +1,24 @@
+- Maybe leave firewalld enabled, maybe it doesn't break fail2ban for docker anymore
+  - `systemctl enable fail2ban`
+- Existing fs:
+  Filesystem      Size  Used Avail Use% Mounted on
+  devtmpfs        7.8G     0  7.8G   0% /dev
+  tmpfs           7.8G     0  7.8G   0% /dev/shm
+  tmpfs           7.8G  2.3M  7.8G   1% /run
+  tmpfs           7.8G     0  7.8G   0% /sys/fs/cgroup
+  /dev/sdb2        25G   12G   12G  49% /sysroot
+  /dev/sdb4        78G   51G   26G  67% /var/mnt/btrfs_pool
+  /dev/sdb4        78G   51G   26G  67% /var/mnt/samba
+  /dev/sdb4        78G   51G   26G  67% /var/mnt/ddclient
+  /dev/sdb4        78G   51G   26G  67% /var/mnt/proxy
+  /dev/sdb4        78G   51G   26G  67% /var/mnt/plex
+  /dev/sdb4        78G   51G   26G  67% /var/lib/docker
+  /dev/sdb4        78G   51G   26G  67% /var/mnt/nextcloud
+  /dev/sdb4        78G   51G   26G  67% /var/mnt/tor
+  /dev/sdb1       976M  133M  777M  15% /boot
+  /dev/sda        112G   54G   54G  51% /var/mnt/backups
+  /dev/sdc        5.5T  2.6T  2.9T  47% /var/mnt/downloads
+- Add disk partitions, all btrfs
+  - Docker needs it's own btrfs partition for btrfs driver
+  - 
+- Copy data from existing sdb and sda

@@ -45,4 +45,4 @@ Upload the .ign file somewhere so that the vm can access it via https, like gith
 
 ### Install the .ign file on the vm
 Start the coreos installer on the vm with the .ign config:
-`sudo coreos-installer install /dev/sda --ignition-url https://example.com/example.ign`
+`sudo coreos-installer install /dev/sda --ignition-url https://raw.githubusercontent.com/kricklen/fedora-core-os/master/example.ign`

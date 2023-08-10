@@ -6,7 +6,10 @@
     "users": [
       {
         "name": "core",
-        "passwordHash": "$1$0Jv3aq2a$BJtVPlmsfJml1riK.JDNk0"
+        "passwordHash": "$1$0Jv3aq2a$BJtVPlmsfJml1riK.JDNk0",
+        "sshAuthorizedKeys": [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDWXbIxY1oUon1c4AEolz0+JAW+gWs0LC3WprTQSnibCJCUL3O0+NmnJ/YBIaDk721j/1/9EkbkUO3etWueAYxd3BP/ZbhYaVKfSxjJGIOYhhkCZinXspKe0KqEdW5hs1AJmsFeqOY9GzKyles/lOtxk+dPsdeAmBjHmw5UpBWUgiCwNZgdaAwGgA5PP90cUbVcPavs+nWmcipHx2E2QiM1mshV7ERencsb/+aIffca48NvgGEMRIZITtWez3yLk83bPVrH4YwCiMZkQg+JgFgVN4z8QSZhOI9XfpViWDu+7769qK3CYMJT4cQ5To4a/9TdKTzMe7i15AHyC99h5UC6P4uqdkszKQNNjBMTUdx6saLb9UI77Uf5GTxVYyI0xQzrIyX2m8mX1c1WdgeaUlq/ekrswIGUlwawxdgiI4J3J+TCOvNpX0EKnRZwVh0DeXjWU8sYIBuc3IwLOazQozclfh+q2+LHwoM1di5C6jxC6M3WN6jtLWceGI5dPs08eOoQPVBqKvUsSv/IJ3VP3SV1r06EqZCN7M0Udo6hk2xVhpjnrWoferg76MfehcLMUa8mE8/8XJcgftw/KoLjwjbgjyA3fTAdMtONa6OPT/zh9FPJ8GjfseD8VUV4LAoTJhGbhKGvbjtf3DDN/cXOzoopoYxk5tqW/7yF/z4hFoapNw=="
+        ]
       }
     ]
   },
