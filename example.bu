@@ -49,6 +49,32 @@ systemd:
         [Install]
         WantedBy=multi-user.target
 storage:
+  disks:
+  - device: /dev/sda
+    wipe_table: true
+    partitions:
+    - number: 1
+      label: boot
+      size_mib: 512
+    - number: 2
+      label: sysroot
+      size_mib: 20480
+    - number: 3
+      label: var
+      size_mib: 0
+  filesystems:
+    - path: /boot
+      device: /dev/disk/by-partlabel/boot
+      label: boot
+      format: btrfs
+    - path: /sysroot
+      device: /dev/disk/by-partlabel/sysroot
+      label: sysroot
+      format: btrfs
+    - path: /var
+      device: /dev/disk/by-partlabel/var
+      label: var
+      format: btrfs
   files:
     - path: /var/install/test.sh
       mode: 0755
@@ -76,6 +102,12 @@ storage:
           then
             echo "Installing google-authenticator ..."
             /usr/bin/rpm-ostree install google-authenticator
+          fi
+          if ! command -v pip &> /dev/null
+          then
+            echo "Installing pip ..."
+            export DO_REBOOT=1
+            /usr/bin/rpm-ostree install pip
           fi
           if [ $DO_REBOOT -gt 0 ]
           then

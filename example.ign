@@ -14,12 +14,35 @@
     ]
   },
   "storage": {
+    "disks": [
+      {
+        "device": "/dev/sda",
+        "partitions": [
+          {
+            "label": "boot",
+            "number": 1,
+            "sizeMiB": 512
+          },
+          {
+            "label": "sysroot",
+            "number": 2,
+            "sizeMiB": 20480
+          },
+          {
+            "label": "var",
+            "number": 3,
+            "sizeMiB": 0
+          }
+        ],
+        "wipeTable": true
+      }
+    ],
     "files": [
       {
         "path": "/var/install/test.sh",
         "contents": {
           "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/4yRMU/DMBCFd/+Ka0Fsjgs7DAgGpkiIDSFkuxfnJMdX2ZcK/j1qSbI0Ur1/z997vpuNGUs2jpJxtvQKfw6cBV7a7/fX57b9eNwp6mADnofBpj3oIwQSuHsCs8ejSWOMSnpMCgB9z7B9S0VsjJTCGWyaZqsAFkk+DJqLZESgf/KEqY4uNDYVchHrVDM86S5W3F/pMOXXenSW4oOzSftImCqnz6Ga/TO7Jg/MIaK240kk5K1wrvz8tWTNNVZyU7NPuF1+FHQQ2MHX7F+eLL9FcPASIaNjPp/2LwAA//9C21FmZQIAAA=="
+          "source": "data:;base64,H4sIAAAAAAAC/5ySQUvEMBCF7/kVs6t4a7N614PowVNBvIlIkp2mA2kSkumi/166tr1swOD9e/3e6+RqJ6ecpCYvtcqDwK8YEsNT9/n6/Nh1b/cHQT3swIRxVP4IzQksMdw8gDziSfrJOcEDegGAZgiwf/GZlXPk7Rls23YvADZJimMTMidEoF9yxkRPFxrlM2mHdaoVXnQXK27/6LDkSz16Re5OK98YR+grp6+hmv0rW5LbEKzDRk2ziMkoDqny55eSNdco5ErNIsW6IjP437NEiov7Ha63GDSW4QAfq3L7Qv7OjKNhBwl1COdn9RMAAP//OlJRy+ECAAA="
         },
         "mode": 493
       },
@@ -46,6 +69,26 @@
           "source": "data:,%23%20Raise%20console%20message%20logging%20level%20from%20DEBUG%20(7)%20to%20WARNING%20(4)%0A%23%20to%20hide%20audit%20messages%20from%20the%20interactive%20console%0Akernel.printk%3D4"
         },
         "mode": 420
+      }
+    ],
+    "filesystems": [
+      {
+        "device": "/dev/disk/by-partlabel/boot",
+        "format": "btrfs",
+        "label": "boot",
+        "path": "/boot"
+      },
+      {
+        "device": "/dev/disk/by-partlabel/sysroot",
+        "format": "btrfs",
+        "label": "sysroot",
+        "path": "/sysroot"
+      },
+      {
+        "device": "/dev/disk/by-partlabel/var",
+        "format": "btrfs",
+        "label": "var",
+        "path": "/var"
       }
     ]
   },
