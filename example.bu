@@ -53,28 +53,21 @@ storage:
   - device: /dev/sda
     wipe_table: true
     partitions:
-    - number: 1
-      label: boot
-      size_mib: 512
-    - number: 2
-      label: sysroot
+    - label: root
       size_mib: 20480
-    - number: 3
-      label: var
+    - label: var
       size_mib: 0
   filesystems:
-    - path: /boot
-      device: /dev/disk/by-partlabel/boot
-      label: boot
+    - path: /root
+      device: /dev/disk/by-partlabel/root
+      label: root
       format: btrfs
-    - path: /sysroot
-      device: /dev/disk/by-partlabel/sysroot
-      label: sysroot
-      format: btrfs
+      wipe_filesystem: true
     - path: /var
       device: /dev/disk/by-partlabel/var
       label: var
       format: btrfs
+      with_mount_unit: true
   files:
     - path: /var/install/test.sh
       mode: 0755
