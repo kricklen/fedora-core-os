@@ -48,27 +48,32 @@ systemd:
 
         [Install]
         WantedBy=multi-user.target
+
 storage:
   disks:
-  - device: /dev/sda
+  - # The link to the block device the OS was booted from.
+    device: /dev/disk/by-id/coreos-boot-disk
+    # We do not want to wipe the partition table since this is the primary
+    # device.
     wipe_table: false
     partitions:
     - number: 4
       label: root
-      size_mib: 20480
+      # Allocate at least 8 GiB to the rootfs. See NOTE above about this.
+      size_mib: 8192
       resize: true
-    - label: var
-      size_mib: 0
+    - size_mib: 0
+      # We assign a descriptive label to the partition. This is important
+      # for referring to it in a device-agnostic way in other parts of the
+      # configuration.
+      label: var
   filesystems:
-    - path: /root
-      device: /dev/disk/by-partlabel/root
-      label: root
-      format: xfs
-      wipe_filesystem: true
     - path: /var
       device: /dev/disk/by-partlabel/var
-      label: var
+      # We can select the filesystem we'd like.
       format: btrfs
+      # Ask Butane to generate a mount unit for us so that this filesystem
+      # gets mounted in the real root.
       with_mount_unit: true
   files:
     - path: /var/install/test.sh
@@ -126,3 +131,82 @@ storage:
           # Raise console message logging level from DEBUG (7) to WARNING (4)
           # to hide audit messages from the interactive console
           kernel.printk=4
+
+# storage:
+#   disks:
+#   - device: /dev/sda
+#     wipe_table: false
+#     partitions:
+#     - number: 4
+#       label: root
+#       size_mib: 20480
+#       resize: true
+#     - label: var
+#       size_mib: 0
+#   filesystems:
+#     - path: /root
+#       device: /dev/disk/by-partlabel/root
+#       label: root
+#       format: xfs
+#       wipe_filesystem: true
+#     - path: /var
+#       device: /dev/disk/by-partlabel/var
+#       label: var
+#       format: btrfs
+#       with_mount_unit: true
+  # files:
+  #   - path: /var/install/test.sh
+  #     mode: 0755
+  #     contents:
+  #       inline: |
+  #         #!/usr/bin/bash
+  #         export DO_REBOOT=0
+  #         if ! command -v git &> /dev/null
+  #         then
+  #           echo "Installing git ..."
+  #           /usr/bin/rpm-ostree install git
+  #         fi
+  #         if ! command -v ansible &> /dev/null
+  #         then
+  #           echo "Installing ansible ..."
+  #           export DO_REBOOT=1
+  #           /usr/bin/rpm-ostree install ansible
+  #         fi
+  #         if ! command -v fail2ban-client &> /dev/null
+  #         then
+  #           echo "Installing fail2ban ..."
+  #           /usr/bin/rpm-ostree install fail2ban
+  #         fi
+  #         if ! command -v google-authenticator &> /dev/null
+  #         then
+  #           echo "Installing google-authenticator ..."
+  #           /usr/bin/rpm-ostree install google-authenticator
+  #         fi
+  #         if ! command -v pip &> /dev/null
+  #         then
+  #           echo "Installing pip ..."
+  #           export DO_REBOOT=1
+  #           /usr/bin/rpm-ostree install pip
+  #         fi
+  #         if [ $DO_REBOOT -gt 0 ]
+  #         then
+  #           /usr/bin/systemctl reboot
+  #         fi
+  #   - path: /etc/hostname
+  #     mode: 0644
+  #     contents:
+  #       inline: |
+  #         fcos-tux
+  #   - path: /etc/profile.d/systemd-pager.sh
+  #     mode: 0644
+  #     contents:
+  #       inline: |
+  #         # Tell systemd to not use a pager when printing information
+  #         export SYSTEMD_PAGER=cat
+  #   - path: /etc/sysctl.d/20-silence-audit.conf
+  #     mode: 0644
+  #     contents:
+  #       inline: |
+  #         # Raise console message logging level from DEBUG (7) to WARNING (4)
+  #         # to hide audit messages from the interactive console
+  #         kernel.printk=4
