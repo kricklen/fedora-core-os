@@ -53,15 +53,17 @@ storage:
   - device: /dev/sda
     wipe_table: true
     partitions:
-    - label: root
+    - number: 4
+      label: root
       size_mib: 20480
+      resize: true
     - label: var
       size_mib: 0
   filesystems:
     - path: /root
       device: /dev/disk/by-partlabel/root
       label: root
-      format: btrfs
+      format: xfs
       wipe_filesystem: true
     - path: /var
       device: /dev/disk/by-partlabel/var
