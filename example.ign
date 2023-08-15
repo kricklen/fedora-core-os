@@ -20,6 +20,8 @@
         "partitions": [
           {
             "label": "root",
+            "number": 4,
+            "resize": true,
             "sizeMiB": 20480
           },
           {
@@ -67,7 +69,7 @@
     "filesystems": [
       {
         "device": "/dev/disk/by-partlabel/root",
-        "format": "btrfs",
+        "format": "xfs",
         "label": "root",
         "path": "/root",
         "wipeFilesystem": true
