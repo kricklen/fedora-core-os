@@ -51,7 +51,7 @@ systemd:
 storage:
   disks:
   - device: /dev/sda
-    wipe_table: true
+    wipe_table: false
     partitions:
     - number: 4
       label: root
